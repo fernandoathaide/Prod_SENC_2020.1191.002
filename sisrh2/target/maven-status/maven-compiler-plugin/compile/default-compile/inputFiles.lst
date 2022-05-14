@@ -1,0 +1,7 @@
+/home/fernando/NetBeansProjects/sisrh2/src/main/java/br/mil/fab/sisrh2/util/Transacional.java
+/home/fernando/NetBeansProjects/sisrh2/src/main/java/br/mil/fab/sisrh2/util/TransacionalInterceptor.java
+/home/fernando/NetBeansProjects/sisrh2/src/main/java/br/mil/fab/sisrh2/service/PessoaService.java
+/home/fernando/NetBeansProjects/sisrh2/src/main/java/br/mil/fab/sisrh2/util/EntityManagerProducer.java
+/home/fernando/NetBeansProjects/sisrh2/src/main/java/br/mil/fab/sisrh2/controller/PessoaBean.java
+/home/fernando/NetBeansProjects/sisrh2/src/main/java/br/mil/fab/sisrh2/model/PessoaModel.java
+/home/fernando/NetBeansProjects/sisrh2/src/main/java/br/mil/fab/sisrh2/repository/PessoasRepository.java

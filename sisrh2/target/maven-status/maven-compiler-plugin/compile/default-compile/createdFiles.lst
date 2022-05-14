@@ -1,0 +1,7 @@
+br/mil/fab/sisrh2/util/TransacionalInterceptor.class
+br/mil/fab/sisrh2/service/PessoaService.class
+br/mil/fab/sisrh2/model/PessoaModel.class
+br/mil/fab/sisrh2/controller/PessoaBean.class
+br/mil/fab/sisrh2/util/Transacional.class
+br/mil/fab/sisrh2/repository/PessoasRepository.class
+br/mil/fab/sisrh2/util/EntityManagerProducer.class
