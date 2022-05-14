@@ -14,3 +14,4 @@ Primefaces 10
 Hibernate Core 5.6.8
 
 Encoding UTF8
+Projeto Conectado ao GitHub
