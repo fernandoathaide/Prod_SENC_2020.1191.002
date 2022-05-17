@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import br.mil.fab.sisrh2.model.PessoaModel;
 import br.mil.fab.sisrh2.repository.PessoasRepository;
 import br.mil.fab.sisrh2.util.Transacional;
-
+import java.util.List;
 
 
 public class PessoaService implements Serializable{
@@ -28,5 +28,9 @@ public class PessoaService implements Serializable{
     @Transacional
     public void salvar(PessoaModel pessoa){
         pessoasRepository.inserir(pessoa);
-    }    
+    }
+    @Transacional
+    public List<PessoaModel> getAllPessoas (){
+        return pessoasRepository.todasPessoas();
+    }
 }

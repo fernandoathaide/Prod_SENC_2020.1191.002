@@ -1,39 +1,55 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Cadastro de Pessoal</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="js/jquery-3.3.1.slim.min.js" ></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </h:head>
-    <h:body style="background-color: activeborder;">
-        <h:form>
-            <p:panelGrid>
-                <p:row>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="card" style="margin-top: 10px; margin-left: 10px;">
-                                <div class="card-header">
-                                </div>
-                                <div class="card-body">
-                                    <p:outputLabel for="nome" value="NOME:" styleClass="p-col-fixed" style="width:60px"/>
-                                    <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" placeholder="Informe Seu nome?" style="width:400px"></p:inputText> <br/>
-                                    <p:outputLabel for="idade" value="IDADE:" styleClass="p-col-fixed" style="width:60px"/>
-                                    <p:inputText id="idade" value="#{pessoaController.pessoa.idade}" placeholder="Informe seua idade?" style="width:400px"></p:inputText>
-                                </div>
-                                <div class="card-footer" style="text-align: right">
-                                    <p:commandButton value="Salvar" id="btnMsn" action="#{pessoaController.salvarPessoa()}" styleClass="ui-button-raised"/>                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </p:row>
-            </p:panelGrid>
-        </h:form>
+    <h:body style="padding: 0px; margin: 0px;">
+        <f:metadata>
+            <f:viewAction action="#{pessoaController.todasPessoas}" />
+	</f:metadata>
+        <div class="container topo" style="background-color: #cce5ff;">
+            <div class="row">
+                <div class="col-2" align="left">
+                    <img src="img/McDonalds-logo-1.png" alt="Logo McDonalds" style="width: 200px;"/>
+                </div>
+                <div class="col-10">
+                    <h1>Projeto Rh do McDonalds</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" align="right">
+                    <button type="button" class="btn btn-primary">Adicionar Pessoa</button>
+                </div>
+            </div>
+        </div>
+        <div class="container contudo" style="background-color: #dee2e6;">
+            <div class="row">
+                <div class="col-12" align="left">
+                    <h2>Lista de Pessoa:</h2>
+                    <p:dataTable id="listpessoas" value="#{pessoaController.listaPessoas}" var="pessoa" 
+                                 selection="#{pessoaController.pessoa}" rowKey="#{pesso.id}"
+                                 selectionMode="single">
+                        <p:column headerText="CÓDIGO" sortBy="#{pessoa.id}">
+                            <h:outputText value="#{pessoa.id}" />
+                        </p:column>
+                        <p:column headerText="NOME">
+                            <h:outputText value="#{pessoa.nome}" />
+                        </p:column>    
+                        <p:column headerText="IDADE">
+                            <h:outputText value="#{pessoa.idade}" />
+                        </p:column>    
+                    </p:dataTable>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>
 

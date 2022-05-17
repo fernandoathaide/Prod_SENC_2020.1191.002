@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de Pessoal</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+         <script src="js/jquery-3.3.1.slim.min.js" ></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body style="background-color: activeborder;">
+        <h:form>
+            <p:panelGrid>
+                <p:row>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="card" style="margin-top: 10px; margin-left: 10px;">
+                                <div class="card-header">
+                                </div>
+                                <div class="card-body">
+                                    <p:outputLabel for="nome" value="NOME:" styleClass="p-col-fixed" style="width:60px"/>
+                                    <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" placeholder="Informe Seu nome?" style="width:400px"></p:inputText> <br/>
+                                    <p:outputLabel for="idade" value="IDADE:" styleClass="p-col-fixed" style="width:60px"/>
+                                    <p:inputText id="idade" value="#{pessoaController.pessoa.idade}" placeholder="Informe seua idade?" style="width:400px"></p:inputText>
+                                </div>
+                                <div class="card-footer" style="text-align: right">
+                                    <p:commandButton value="Salvar" id="btnMsn" action="#{pessoaController.salvarPessoa()}" styleClass="ui-button-raised"/>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p:row>
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

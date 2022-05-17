@@ -7,10 +7,15 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
     <persistence-unit name="bancoJSFCurso">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bd_curso" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bd_curso?useUnicode=yes;characterEncoding=UTF-8" />
             <property name="javax.persistence.jdbc.user" value="fernando" />
             <property name="javax.persistence.jdbc.password" value="WCOc@rneir08109" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            
+            <!-- Charcet UTF8 -->
+            <property name="hibernate.connection.useUnicode" value="true" />
+            <property name="hibernate.connection.characterEncoding" value="UTF-8" />
+
             
             <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />-->
             

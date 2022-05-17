@@ -35,13 +35,16 @@ public class PessoasRepository implements Serializable {
     }
     
     //Pesquisar por nome Usando JPQL e Retornando um Array List
-    public List<PessoaModel> buscar(String texto){
+    public List<PessoaModel> buscarPessoaPorTexto(String texto){
         String jpql = "from Pessoa where nome like :textoNome";
         TypedQuery<PessoaModel> query = manager.createQuery(jpql, PessoaModel.class);
         
         query.setParameter("textoNome", texto + "%");
         
         return query.getResultList();
+    }
+    public List<PessoaModel> todasPessoas() {
+         return manager.createQuery("from PessoaModel", PessoaModel.class).getResultList();
     }
     
     public PessoaModel inserir(PessoaModel pessoa){
