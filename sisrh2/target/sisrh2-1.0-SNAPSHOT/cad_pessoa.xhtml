@@ -6,27 +6,28 @@
     <h:head>
         <title>Cadastro de Pessoal</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-         <script src="js/jquery-3.3.1.slim.min.js" ></script>
+        <script src="js/jquery-3.3.1.slim.min.js" ></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
     </h:head>
     <h:body style="background-color: activeborder;">
-        <h:form>
+        <h:form id="formcadpessoa">
             <p:panelGrid>
                 <p:row>
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col">
                             <div class="card" style="margin-top: 10px; margin-left: 10px;">
                                 <div class="card-header">
                                 </div>
                                 <div class="card-body">
                                     <p:outputLabel for="nome" value="NOME:" styleClass="p-col-fixed" style="width:60px"/>
-                                    <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" placeholder="Informe Seu nome?" style="width:400px"></p:inputText> <br/>
+                                    <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" placeholder="Informe Seu nome?" style="width:400px" required=""></p:inputText> <br/>
                                     <p:outputLabel for="idade" value="IDADE:" styleClass="p-col-fixed" style="width:60px"/>
-                                    <p:inputText id="idade" value="#{pessoaController.pessoa.idade}" placeholder="Informe seua idade?" style="width:400px"></p:inputText>
+                                    <p:inputText id="idade" value="#{pessoaController.pessoa.idade}" placeholder="Informe seua idade?" style="width:400px" required=""></p:inputText>
                                 </div>
                                 <div class="card-footer" style="text-align: right">
-                                    <p:commandButton value="Salvar" id="btnMsn" action="#{pessoaController.salvarPessoa()}" styleClass="ui-button-raised"/>                                    
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <p:commandButton value="Salvar" id="btnsalvar" action="#{pessoaController.salvarPessoa()}" styleClass="ui-button-raised"/>
                                 </div>
                             </div>
                         </div>
