@@ -21,3 +21,8 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+#Não comitar o arquivo de configuração do Banco persistence.xml e 
+#Ignorar aquivo pom.xml
+sisrh2/src/main/resources/META-INF/persistence.xml
+sisrh2/pom.xml
