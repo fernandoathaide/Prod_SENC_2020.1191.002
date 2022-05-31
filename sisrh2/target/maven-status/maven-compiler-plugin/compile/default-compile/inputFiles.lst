@@ -1,5 +1,6 @@
 /home/fernando/NetBeansProjects/Prod_SENC_2020.1191.002/sisrh2/src/main/java/br/mil/fab/sisrh2/util/Transacional.java
 /home/fernando/NetBeansProjects/Prod_SENC_2020.1191.002/sisrh2/src/main/java/br/mil/fab/sisrh2/service/PessoaService.java
+/home/fernando/NetBeansProjects/Prod_SENC_2020.1191.002/sisrh2/src/main/java/br/mil/fab/sisrh2/util/FacesMessages.java
 /home/fernando/NetBeansProjects/Prod_SENC_2020.1191.002/sisrh2/src/main/java/br/mil/fab/sisrh2/util/EntityManagerProducer.java
 /home/fernando/NetBeansProjects/Prod_SENC_2020.1191.002/sisrh2/src/main/java/br/mil/fab/sisrh2/repository/PessoasRepository.java
 /home/fernando/NetBeansProjects/Prod_SENC_2020.1191.002/sisrh2/src/main/java/br/mil/fab/sisrh2/model/PessoaModel.java

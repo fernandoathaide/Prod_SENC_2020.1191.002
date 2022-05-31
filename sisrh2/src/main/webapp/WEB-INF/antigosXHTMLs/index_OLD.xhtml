@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="titulo">
+        Cadastro de Pessoas 
+    </ui:define>
+    
+    <h:head>
+        <title>Cadastro de Pessoal</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $("#cadModalPessoa").on('hide.bs.modal', function (event) {
+                    //Quando Fechar a Modal atualizar a página index da aplicação
+                    //document.window.history.back();
+                    //document.location.reload();
+                    $("#formcadpessoa").trigger("reset");
+                    $("nome").val("");
+                    $("idade").val("");
+                    window.location.reload();
+                    //document.window.location();
+                });
+            });
+        </script>
+    </h:head>
+    <h:body style="padding: 0px; margin: 0px;">
+        <f:metadata>
+            <f:viewAction action="#{pessoaController.todasPessoas}" />
+        </f:metadata>
+        <div class="container topo" style="background-color: #cce5ff;">
+            <div class="row">
+                <div class="col-2" align="left">
+                    <img src="img/McDonalds-logo-1.png" alt="Logo McDonalds" style="width: 200px;"/>
+                </div>
+                <div class="col-10">
+                    <h1>Projeto Rh do McDonalds</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" align="right">
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#cadModalPessoa" >Adicionar Pessoa</button>
+                </div>
+            </div>
+        </div>
+        <div class="container contudo" style="background-color: #dee2e6;">
+            <div class="row">
+                <div class="col-12" align="left">
+                    <h2>Lista de Pessoa:</h2>
+                    <p:dataTable id="listpessoas" value="#{pessoaController.listaPessoas}" var="pessoa" 
+                                 selection="#{pessoaController.pessoa}" rowKey="#{pesso.id}"
+                                 selectionMode="single">
+                        <p:column headerText="CÓDIGO" sortBy="#{pessoa.id}">
+                            <h:outputText value="#{pessoa.id}" />
+                        </p:column>
+                        <p:column headerText="NOME">
+                            <h:outputText value="#{pessoa.nome}" />
+                        </p:column>    
+                        <p:column headerText="IDADE">
+                            <h:outputText value="#{pessoa.idade}" />
+                        </p:column>    
+                    </p:dataTable>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="cadModalPessoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Nova Pessoa.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ui:include src="cad_pessoa.xhtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
