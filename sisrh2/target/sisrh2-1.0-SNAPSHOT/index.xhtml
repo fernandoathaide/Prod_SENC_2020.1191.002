@@ -7,6 +7,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="WEB-INF/template/Layout.xhtml">
 
+    <!-- Tabela de icons para os botões
+        https://www.primefaces.org/diamond/icons.xhtml
+    -->
+    
     <ui:define name="titulo">
         Cadastro de Pessoas
     </ui:define>
@@ -30,6 +34,19 @@
                                      actionListener="#{pessoaController.prepararSalvarPessoa()}"
                                      oncomplete="PF('pessoaDialogWidgetVar').show()"
                                      update="pessoaDialog" process="@this"/>
+                    <p:separator style="border: solid 0px #000; height: 40px; margin: 5px"/>
+                    <p:commandButton value="Alterar Pessoa"
+                                     icon="pi pi-directions" styleClass="ui-button-secondary"
+                                     actionListener="#{pessoaController.prepararSalvarPessoa()}"
+                                     oncomplete="PF('pessoaDialogWidgetVar').show()"
+                                     update="pessoaDialog" process="@this"/>
+                    <p:separator style="border: solid 0px #000; height: 40px; margin: 5px"/>
+                    <p:commandButton value="Excluir Registro"
+                                     icon="pi pi-times-circle" styleClass="ui-button-danger"
+                                     actionListener="#{pessoaController.prepararSalvarPessoa()}"
+                                     oncomplete="PF('pessoaDialogWidgetVar').show()"
+                                     update="pessoaDialog" process="@this"/>
+                    
                 </f:facet>
             </p:toolbar>
 
@@ -63,7 +80,7 @@
                                    value="#{pessoaController.pessoa.idade}"/>
                     
                     <p:commandButton value="Salvar" actionListener="#{pessoaController.salvarPessoa}" 
-                                     update=":pessoaDataTable :pessoaPanelGrid" ajax="false"
+                                     update="pessoaDataTable pessoaPanelGrid" ajax="false"
                                      process="pessoaDialog" oncomplete="PF('pessoaDialogWidgetVar').hide()"/>
                 </h:panelGrid>
             </p:dialog>
