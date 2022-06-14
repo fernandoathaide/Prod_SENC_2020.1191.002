@@ -6,10 +6,6 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="WEB-INF/template/Layout.xhtml">
-
-    <!-- Tabela de icons para os botões
-        https://www.primefaces.org/diamond/icons.xhtml
-    -->
     
     <ui:define name="titulo">
         Cadastro de Pessoas
@@ -19,7 +15,8 @@
         <f:metadata>
             <f:viewAction action="#{pessoaController.todasPessoas}" />
         </f:metadata>
-        <h:form>
+        <h:form id="frm">
+<!--            <p:message id="messages" />-->
             <p:toolbar>
                 <f:facet name="left">
                     <p:inputText id="termoPesquisa" placeholder="Digite aqui um termo para pesquisa..." 
@@ -54,9 +51,9 @@
             <!--paginator="true" rows="10" paginatorPosition="bottom"-->
             <p:dataTable id="pessoaDataTable" value="#{pessoaController.listaPessoas}" 
                          var="pessoa" emptyMessage="Nenhuma informação a ser exibida"                         
-                         
-                         selection="#{pessoaController.pessoa}" rowKey="#{pesso.id}"
+                         selection="#{pessoaController.pessoa}" rowKey="#{pessoa.id}"
                          selectionMode="single">
+                
                 <p:column headerText="CÓDIGO" sortBy="#{pessoa.id}">
                     <h:outputText value="#{pessoa.id}" />
                 </p:column>
@@ -70,6 +67,12 @@
 
             <p:dialog id="pessoaDialog" header="Nova Pessoa" widgetVar="pessoaDialogWidgetVar"
                       modal="true" resizable="false" closeOnEscape="true">
+                
+                
+<!--                <p:message id="pessoaMessages" />-->
+                
+                <p:defaultCommand target="salvarPessoa" scope="pessoaDialog" />
+                    
                 <h:panelGrid id="pessoaPanelGrid" columns="2">
                     <p:outputLabel value="Nome: " for="nome" /> 
                     <p:inputText id="nome" size="40" maxlength="120" 
@@ -79,9 +82,9 @@
                     <p:inputText id="idade" size="40" maxlength="100" 
                                    value="#{pessoaController.pessoa.idade}"/>
                     
-                    <p:commandButton value="Salvar" actionListener="#{pessoaController.salvarPessoa}" 
-                                     update="pessoaDataTable pessoaPanelGrid" ajax="false"
-                                     process="pessoaDialog" oncomplete="PF('pessoaDialogWidgetVar').hide()"/>
+                    <p:commandButton id="salvarPessoa" value="Salvar" actionListener="#{pessoaController.salvarPessoa}" 
+                                     update="pessoaDataTable pessoaPanelGrid pessoaMessages" ajax="false"
+                                     oncomplete="PF('pessoaDialogWidgetVar').hide()"  process="pessoaDialog"/>
                 </h:panelGrid>
             </p:dialog>
         </h:form>

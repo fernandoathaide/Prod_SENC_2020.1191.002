@@ -19,6 +19,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import br.mil.fab.sisrh2.util.FacesMessages;
+import java.util.Arrays;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.PrimeFaces;
 
 @Named(value = "pessoaController")
 @ViewScoped
@@ -51,7 +55,11 @@ public class PessoaBean implements Serializable {
     }
     public void salvarPessoa() {
         pessoasService.salvar(pessoa);
-        messages.info("Empresa cadastrada com sucesso!");
+        atualizarTela();
+        
+         addMessage("Pessoa cadastrada com sucesso!");
+        
+        //RequestContext.getCurrentInstance().update(Arrays.asList( "frm:pessoaDataTable", "frm:messages" ));
     }
     
     //Metodo para trazer todo do banco Tabela Pessoa
@@ -76,9 +84,22 @@ public class PessoaBean implements Serializable {
     public void pesquisar(){
         listaPessoas = pessoasRepository.buscarPessoaPorTexto(termoPesquisa);
         if(listaPessoas.isEmpty()){
-            messages.info("Sua Consulta não retornou registro do Banco de Dados.");
+            addMessage("Sua Consulta não retornou registro do Banco de Dados.");
         }
     }
+    
+    
+    public void addMessage(String summary) {
+        //FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        //FacesContext.getCurrentInstance().addMessage(null, message);
+//        /messages.info(summary);
+        PrimeFaces.current().ajax().update("frm:pessoaDataTable", "frm:messages");
+    }
+    
+    private void atualizarTela(){
+        todasPessoas();
+    }
+    
     
     public String getTermoPesquisa() {
         return termoPesquisa;
