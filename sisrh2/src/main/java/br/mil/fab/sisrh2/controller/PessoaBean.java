@@ -19,7 +19,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import br.mil.fab.sisrh2.util.FacesMessages;
-import java.util.Arrays;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
@@ -30,7 +29,7 @@ public class PessoaBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private PessoaModel pessoa;
+    private PessoaModel selectedPessoa;
     
     @Inject //Injeção de Dependência usando o CDI
     private PessoaService pessoasService;
@@ -44,24 +43,25 @@ public class PessoaBean implements Serializable {
     private List<PessoaModel> listaPessoas;
     
     private String termoPesquisa;
+        
+    private List<PessoaModel> selectedPessoas;
 
     public PessoaBean() {
     }
 
     //Metodos de controle da tabela Pessoa
     //Metodo para Salva Uma pessoa No banco
-    public void prepararSalvarPessoa(){
-        pessoa = new PessoaModel();
+    public void openNewPessoa(){
+        this.selectedPessoa = new PessoaModel();
     }
     public void salvarPessoa() {
-        pessoasService.salvar(pessoa);
+        pessoasService.salvar(selectedPessoa);
         atualizarTela();
         
          addMessage("Pessoa cadastrada com sucesso!");
         
         //RequestContext.getCurrentInstance().update(Arrays.asList( "frm:pessoaDataTable", "frm:messages" ));
     }
-    
     //Metodo para trazer todo do banco Tabela Pessoa
     public void todasPessoas() {
         listaPessoas = pessoasService.getAllPessoas();
@@ -70,11 +70,11 @@ public class PessoaBean implements Serializable {
     
     //Injeção de dependência modo Tradicional
     public PessoaModel getPessoa() {
-        return pessoa;
+        return selectedPessoa;
     }
 
     public void setPessoa(PessoaModel pessoa) {
-        this.pessoa = pessoa;
+        this.selectedPessoa = pessoa;
     }
 
     public List<PessoaModel> getListaPessoas() {
@@ -101,12 +101,41 @@ public class PessoaBean implements Serializable {
     }
     
     
-    public String getTermoPesquisa() {
-        return termoPesquisa;
+    public String getTermoPesquisa() {        return termoPesquisa;
     }
 
     public void setTermoPesquisa(String termoPesquisa) {
         this.termoPesquisa = termoPesquisa;
+    }
+
+    public PessoaModel getSelectedPessoa() {
+        return selectedPessoa;
+    }
+
+    public void setSelectedPessoa(PessoaModel selectedPessoa) {
+        this.selectedPessoa = selectedPessoa;
+    }
+
+    public List<PessoaModel> getSelectedPessoas() {
+        return selectedPessoas;
+    }
+
+    public void setSelectedPessoas(List<PessoaModel> selectedPessoas) {
+        this.selectedPessoas = selectedPessoas;
+    }
+
+   
+     public void deletePessoa() {
+        this.pessoasRepository.deletar(selectedPessoa);
+        this.selectedPessoa = null;
+        atualizarTela();
+        //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pessoa Removida!"));
+        //PrimeFaces.current().ajax().update("frm:messages", "frm:pessoaDataTable");
+    }
+
+    
+     public boolean hasSelectedPessoas() {
+        return this.selectedPessoas != null && !this.selectedPessoas.isEmpty();
     }
     
 }

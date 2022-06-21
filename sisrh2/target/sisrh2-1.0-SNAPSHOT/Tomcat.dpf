@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/sisrh2">
+  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="Mysql8.0.29" password="123456" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/bd_curso?zeroDateTimeBehavior=CONVERT_TO_NULL" username="root"/>
+  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="MysqlCON" password="WCOc@rneir08109" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=CONVERT_TO_NULL" username="fernando"/>
+  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="mysql" password="WCOc@rneir08109" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/bd_curso?zeroDateTimeBehavior=CONVERT_TO_NULL" username="fernando"/>
+</Context>

@@ -52,8 +52,7 @@ public class PessoasRepository implements Serializable {
     }
     
     public void deletar(PessoaModel pessoa){
-        pessoa = getIdPessoa(pessoa.getId());
+        PessoaModel p = getIdPessoa(pessoa.getId());
         manager.remove(pessoa);
     }
-    
 }

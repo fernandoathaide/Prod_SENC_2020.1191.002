@@ -6,17 +6,18 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="WEB-INF/template/Layout.xhtml">
-    
+
     <ui:define name="titulo">
         Cadastro de Pessoas
     </ui:define>
-    
+
     <ui:define name="conteudo">
         <f:metadata>
             <f:viewAction action="#{pessoaController.todasPessoas}" />
         </f:metadata>
         <h:form id="frm">
-<!--            <p:message id="messages" />-->
+            <!--            <p:message id="messages" />-->
+            
             <p:toolbar>
                 <f:facet name="left">
                     <p:inputText id="termoPesquisa" placeholder="Digite aqui um termo para pesquisa..." 
@@ -26,34 +27,26 @@
                                      actionListener="#{pessoaController.pesquisar}" update="pessoaDataTable"
                                      process="@this termoPesquisa" />
                     <p:separator style="border: solid 0px #000; height: 40px; margin: 5px"/>
+
                     <p:commandButton value="Nova Pessoa"
                                      icon="pi pi-user-plus" styleClass="ui-button-raised"
-                                     actionListener="#{pessoaController.prepararSalvarPessoa()}"
-                                     oncomplete="PF('pessoaDialogWidgetVar').show()"
-                                     update="pessoaDialog" process="@this"/>
-                    <p:separator style="border: solid 0px #000; height: 40px; margin: 5px"/>
-                    <p:commandButton value="Alterar Pessoa"
-                                     icon="pi pi-directions" styleClass="ui-button-secondary"
-                                     actionListener="#{pessoaController.prepararSalvarPessoa()}"
-                                     oncomplete="PF('pessoaDialogWidgetVar').show()"
-                                     update="pessoaDialog" process="@this"/>
-                    <p:separator style="border: solid 0px #000; height: 40px; margin: 5px"/>
-                    <p:commandButton value="Excluir Registro"
-                                     icon="pi pi-times-circle" styleClass="ui-button-danger"
-                                     actionListener="#{pessoaController.prepararSalvarPessoa()}"
-                                     oncomplete="PF('pessoaDialogWidgetVar').show()"
-                                     update="pessoaDialog" process="@this"/>
-                    
+                                     actionListener="#{pessoaController.openNewPessoa}"
+                                     update=":frm:manage-pessoa-content"
+                                     oncomplete="PF('managePessoaDialog').show()">
+                        <p:resetInput target=":frm:manage-pessoa-content" />
+                    </p:commandButton>
                 </f:facet>
+                
             </p:toolbar>
 
             <p:spacer height="20px" />
             <!--paginator="true" rows="10" paginatorPosition="bottom"-->
-            <p:dataTable id="pessoaDataTable" value="#{pessoaController.listaPessoas}" 
+            <p:dataTable id="pessoaDataTable" widgetVar="pessoaDataTable" value="#{pessoaController.listaPessoas}" 
                          var="pessoa" emptyMessage="Nenhuma informação a ser exibida"                         
-                         selection="#{pessoaController.pessoa}" rowKey="#{pessoa.id}"
+                         selection="#{pessoaController.selectedPessoa}" rowKey="#{pessoa.id}"
+                         paginator="true" rows="5" rowSelectMode="add" paginatorPosition="bottom"
                          selectionMode="single">
-                
+
                 <p:column headerText="CÓDIGO" sortBy="#{pessoa.id}">
                     <h:outputText value="#{pessoa.id}" />
                 </p:column>
@@ -62,31 +55,64 @@
                 </p:column>    
                 <p:column headerText="IDADE">
                     <h:outputText value="#{pessoa.idade}" />
-                </p:column>    
+                </p:column> 
+
+
+                <p:column exportable="false">
+                    <p:commandButton icon="pi pi-pencil" update=":frm:manage-pessoa-content"
+                                     oncomplete="PF('managePessoaDialog').show()"
+                                     styleClass="edit-button rounded-button ui-button-success" process="@this">
+                        <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaController.selectedPessoa}"/>
+                        <p:resetInput target=":frm:manage-pessoa-content"/>
+                    </p:commandButton>
+                    <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                 oncomplete="PF('deletePessoaDialog').show()">
+                        <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaController.selectedPessoa}"/>
+                </p:commandButton>
+                </p:column>
+
+
             </p:dataTable>
 
-            <p:dialog id="pessoaDialog" header="Nova Pessoa" widgetVar="pessoaDialogWidgetVar"
-                      modal="true" resizable="false" closeOnEscape="true">
-                
-                
-<!--                <p:message id="pessoaMessages" />-->
-                
-                <p:defaultCommand target="salvarPessoa" scope="pessoaDialog" />
-                    
-                <h:panelGrid id="pessoaPanelGrid" columns="2">
-                    <p:outputLabel value="Nome: " for="nome" /> 
-                    <p:inputText id="nome" size="40" maxlength="120" 
-                                 value="#{pessoaController.pessoa.nome}"/>
+            <p:dialog header="Manager Pessoas" showEffect="fade" modal="true"
+                      widgetVar="managePessoaDialog" responsive="true">
+                <p:outputPanel id="manage-pessoa-content" class="ui-fluid">
+                    <p:outputPanel rendered="#{ not empty pessoaController.selectedPessoa}">
+                        <h:panelGrid id="pessoaPanelGrid" columns="2">
+                            <p:outputLabel value="Nome: " for="nome" /> 
+                            <p:inputText id="nome" size="40" maxlength="120" 
+                                         value="#{pessoaController.selectedPessoa.nome}"/>
 
-                    <p:outputLabel value="Idade: " for="idade" />
-                    <p:inputText id="idade" size="40" maxlength="100" 
-                                   value="#{pessoaController.pessoa.idade}"/>
-                    
-                    <p:commandButton id="salvarPessoa" value="Salvar" actionListener="#{pessoaController.salvarPessoa}" 
-                                     update="pessoaDataTable pessoaPanelGrid pessoaMessages" ajax="false"
-                                     oncomplete="PF('pessoaDialogWidgetVar').hide()"  process="pessoaDialog"/>
-                </h:panelGrid>
+                            <p:outputLabel value="Idade: " for="idade" />
+                            <p:inputText id="idade" size="40" maxlength="100" 
+                                         value="#{pessoaController.selectedPessoa.idade}"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </p:outputPanel>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{pessoaController.salvarPessoa}"
+                                     update="manage-pessoa-content" oncomplete="PF('managePessoaDialog').hide()" 
+                                     process="manage-pessoa-content @this" />
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('managePessoaDialog').hide()" 
+                                     class="ui-button-secondary"/>
+                </f:facet>
             </p:dialog>
+            
+            <p:confirmDialog widgetVar="deletePessoaDialog" showEffect="fade" width="300"
+                         message="Deletar Pessoa?" header="Confirm" severity="warn">
+                <p:commandButton value="Sim" icon="pi pi-check" actionListener="#{pessoaController.deletePessoa()}"
+                             process="@this" oncomplete="PF('deletePessoaDialog').hide()"/>
+            <p:commandButton value="Não" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                             onclick="PF('deletePessoaDialog').hide()"/>
+        </p:confirmDialog>
+
+        <p:confirmDialog global="true" showEffect="fade" width="300">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                             icon="pi pi-times"/>
+        </p:confirmDialog>
+            
         </h:form>
     </ui:define>
 </ui:composition>
